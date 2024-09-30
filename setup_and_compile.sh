@@ -188,9 +188,10 @@ fi
 
 # Compile the program with the necessary flags
 if ! g++ main.cpp -o reddit_bot \
-    -std=c++11 \
+    -std=c++17 \
     ${PYTHON_INCLUDE} \
     -I./include \
+    -I${NUMPY_INCLUDE} \
     ${PYTHON_LDFLAGS} \
     -lcurl; then
     error_exit ${LINENO} "Compilation failed."
