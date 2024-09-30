@@ -73,7 +73,7 @@ The project includes a setup and compilation script (`setup_and_compile.sh`) tha
 Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/yourusername/reddit-bot-cpp.git
+git clone https://github.com/JangoDarkSaber/Reddit_Bot.git
 cd reddit-bot-cpp
 ```
 
