@@ -74,7 +74,7 @@ Clone this repository to your local machine:
 
 ```bash
 git clone https://github.com/JangoDarkSaber/Reddit_Bot.git
-cd reddit-bot-cpp
+cd Reddit_bot
 ```
 
 ### Prepare `main.cpp`
