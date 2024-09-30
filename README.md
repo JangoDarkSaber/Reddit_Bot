@@ -1,11 +1,5 @@
 # Reddit_Bot
 
-Certainly! Here is the updated `README.md` file for your Reddit bot project:
-
----
-
-# Reddit Bot in C++
-
 ## Table of Contents
 
 - [Introduction](#introduction)
