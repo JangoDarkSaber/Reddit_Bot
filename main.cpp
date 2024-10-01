@@ -10,6 +10,9 @@
 #include <algorithm>           // For std::sort
 #include <numeric>             // For std::iota
 #include <getopt.h>            // For command-line options
+#include <ctime>               // For std::time
+#include <thread>              // For std::this_thread::sleep_for
+#include <chrono>              // For std::chrono::milliseconds
 
 namespace plt = matplotlibcpp;
 using json = nlohmann::json;
@@ -366,25 +369,34 @@ int main(int argc, char* argv[]) {
             postCounts.push_back(authorPostCounts[i].second);
         }
 
-        // Generate numerical positions for x-axis
-        std::vector<int> xPositions(topN);
-        std::iota(xPositions.begin(), xPositions.end(), 0);
+        // Generate numerical positions for the x-axis
+        std::vector<double> xPositions(topN);
+        std::iota(xPositions.begin(), xPositions.end(), 0);  // 0, 1, 2, ...
+
+        // Debugging output (optional)
+        if (verbose) {
+            std::cout << "X-tick positions: ";
+            for (const auto& pos : xPositions) std::cout << pos << " ";
+            std::cout << std::endl;
+
+            std::cout << "X-tick labels: ";
+            for (const auto& label : topAuthors) std::cout << label << " ";
+            std::cout << std::endl;
+        }
 
         // Plot the bar chart
         plt::bar(xPositions, postCounts);
 
         // Set x-ticks and labels
         plt::xticks(xPositions, topAuthors);
+
+        // Rotate x-tick labels (optional)
+        plt::gca().attr("tick_params")("axis", "x", "labelrotation", 45);
+
+        // Set plot labels
         plt::xlabel("Authors");
         plt::ylabel("Number of Posts");
-        plt::title("Top Reddit Posters in r/" + subreddit);
-
-        // Rotate x-axis labels
-        plt::xticks(xPositions, topAuthors);
-        plt::xticks(xPositions, topAuthors, {{"rotation", "45"}});
-
-        // Adjust layout to prevent label cutoff
-        plt::tight_layout();
+        plt::title("Top Reddit Posters");
 
         // Save the plot
         plt::save("top_posters.png");
